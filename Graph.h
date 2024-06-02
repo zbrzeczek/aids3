@@ -18,6 +18,7 @@ private:
     bool* reached;
     Vertex *relations;
     int* biPart;
+    int* colors;
 public:
     Graph(int num);
 
@@ -27,7 +28,7 @@ public:
     int getSorted(int index);
     bool getReached(int index);
     int getBiPart(int index);
-
+    int getColor(int index);
 
     void setVertices(int num);
     void setVector(Vertex vertex, int index);
@@ -35,6 +36,7 @@ public:
     void setSorted(int deg, int index);
     void setReached(bool reach, int index);
     void setBiPart(int num, int index);
+    void setColors(int col, int index);
 
 
     void copyDegrees();

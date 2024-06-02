@@ -178,6 +178,53 @@ void numComp(Graph *graph) {
     printf("%d\n", complexity);
 }
 
+int smallestColor(Graph * graph, int index){
+    int var =0;
+    bool *smallColor = new bool[graph->getVertices()];
+
+    for (int i = 0; i < graph->getVertices(); i++){
+        smallColor[i] = true;
+    }
+
+    for (int i = 0; i < graph->getVector(index).getDegree(); i++) {
+        if (!graph->getColor(graph->getVector(index).getRelation(i)-1))
+        {
+            continue;
+        }
+        smallColor[graph->getColor(graph->getVector(index).getRelation(i)-1)] = false;
+    }
+
+    while (!smallColor[var]) var++;
+    /*bool found = false;
+    while (!found) {
+        found = true;
+        for (int i = 0; i < graph->getVector(index).getDegree(); i++) {
+            if (graph->getColor(graph->getVector(index).getRelation(i) - 1) == min) {
+                min++;
+                found = false;
+            }
+        }
+
+       if (index == graph->getVertices() - 1 && !found) found = true;
+    }*/
+    delete [] smallColor;
+    return var+1;
+}
+
+void colorGreedy(Graph *graph){
+    graph->setColors(1, 0);
+    for (int i = 1; i < graph->getVertices(); i++){
+        graph->setColors(smallestColor( graph, i) ,i);
+    }
+
+    for (int j = 0; j < graph->getVertices(); j++){
+        std::cout << graph->getColor(j) << " ";
+        //printf("%d ", graph->getColor(j));
+    }
+    std::cout << std::endl;
+    //printf("\n");
+}
+
 void complEdges(Graph *graph) {
     unsigned long long result, ver = 0, sum = 0;
     unsigned long long var = graph->getVertices();
@@ -234,7 +281,14 @@ int main() {
         numComp(&newGraph);
         biPart(&newGraph);
 
-        for (int j = 0; j < 6; j++){
+        for (int j = 0; j < 2; j++){
+            printf("?\n");
+        }
+
+        colorGreedy(&newGraph);
+
+
+        for (int j = 0; j < 3; j++){
             printf("?\n");
         }
 

@@ -30,6 +30,10 @@ void Graph::setBiPart(int num, int index) {
     biPart[index] = num;
 }
 
+void Graph::setColors(int col, int index) {
+    colors[index] = col;
+}
+
 
 
 //gettery
@@ -57,6 +61,10 @@ int Graph::getBiPart(int index) {
     return biPart[index];
 }
 
+int Graph::getColor(int index) {
+    return colors[index];
+}
+
 
 
 //other
@@ -76,12 +84,16 @@ Graph::Graph(int num) {
     reached = new bool[num];
     relations = new Vertex[num];
     biPart = new int[num];
+    colors = new int[num];
 
     for(int i =0; i < num; i++){
         reached[i] = false;
     }
     for(int i =0; i < num; i++){
         biPart[i] = 2;
+    }
+    for(int i =0; i < num; i++){
+        colors[i] = 0;
     }
 }
 
